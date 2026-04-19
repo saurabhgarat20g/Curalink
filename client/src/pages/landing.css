@@ -1,0 +1,392 @@
+/* ═══════════════════════════════════════════════════════════
+   LANDING PAGE — Apple / Google Premium Animations
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Layout ── */
+.landing-layout {
+    overflow: hidden;
+}
+
+/* ── Nav override ── */
+.landing-nav {
+    background: transparent;
+}
+
+.landing-brand {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    animation: landingFadeDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+[data-theme="dark"] .landing-brand {
+    color: rgba(241, 245, 249, 0.9);
+}
+
+[data-theme="light"] .landing-brand {
+    color: rgba(15, 23, 42, 0.85);
+}
+
+.landing-nav .auth-nav-links {
+    animation: landingFadeDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ── Card wrapper ── */
+.landing-card-wrapper {
+    max-width: 560px;
+}
+
+/* ── Card ── */
+.landing-card {
+    border-radius: 28px;
+    padding: 2.75rem 2.5rem 2rem;
+    animation: landingCardIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    text-align: center;
+}
+
+[data-theme="dark"] .landing-card {
+    background: rgba(7, 17, 31, 0.55);
+    border: 1px solid rgba(99, 162, 255, 0.18);
+    box-shadow:
+        0 0 0 1px rgba(99, 162, 255, 0.06),
+        0 24px 64px rgba(0, 0, 0, 0.6),
+        0 8px 24px rgba(59, 130, 246, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .landing-card {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow:
+        0 24px 64px rgba(59, 130, 246, 0.10),
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* ── Animated Icons ── */
+.landing-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.landing-icon {
+    font-size: 2rem;
+    display: inline-block;
+    animation: iconEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+}
+
+.licon-1 { animation-delay: 0.35s; }
+.licon-2 { animation-delay: 0.50s; }
+.licon-3 { animation-delay: 0.65s; }
+
+/* Continuous gentle float after entrance */
+.licon-1 { animation: iconEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s both, iconFloat 4.0s ease-in-out 1.2s infinite; }
+.licon-2 { animation: iconEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.50s both, iconFloat 4.5s ease-in-out 1.4s infinite; }
+.licon-3 { animation: iconEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.65s both, iconFloat 3.8s ease-in-out 1.6s infinite; }
+
+/* ── Title ── */
+.landing-title {
+    font-family: var(--font-display, system-ui);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+    animation: landingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+[data-theme="dark"] .landing-title {
+    color: #f1f5f9;
+}
+
+[data-theme="light"] .landing-title {
+    color: #0f172a;
+}
+
+/* Google/Apple gradient accent on the brand name */
+.landing-title-accent {
+    background: linear-gradient(135deg, #3b82f6 0%, #818cf8 40%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Subtle shimmer animation */
+    background-size: 200% auto;
+    animation:
+        landingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both,
+        gradientShift 4s linear 1.5s infinite;
+}
+
+/* ── Subtitle ── */
+.landing-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    animation: landingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+}
+
+[data-theme="dark"] .landing-subtitle {
+    color: rgba(148, 163, 184, 0.9);
+}
+
+[data-theme="light"] .landing-subtitle {
+    color: #475569;
+}
+
+/* ── CTA Buttons ── */
+.landing-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: landingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+.landing-btn {
+    width: 100%;
+    padding: 0.95rem 1.5rem;
+    border-radius: 14px;
+    font-size: 0.97rem;
+    font-weight: 650;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: var(--font, system-ui);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s ease,
+        background 0.2s ease;
+    letter-spacing: -0.01em;
+}
+
+/* Ripple shimmer on hover */
+.landing-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: inherit;
+}
+
+.landing-btn:hover::before {
+    opacity: 1;
+}
+
+.landing-btn:hover {
+    transform: translateY(-3px) scale(1.01);
+}
+
+.landing-btn:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+.lbtn-icon {
+    font-size: 1.1rem;
+}
+
+.lbtn-arrow {
+    margin-left: auto;
+    font-size: 1rem;
+    opacity: 0.6;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.landing-btn:hover .lbtn-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+}
+
+/* Filled — Google/Apple primary button style */
+.landing-btn-filled {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #4f46e5 100%);
+    background-size: 200% auto;
+    color: #fff;
+    border: none;
+    box-shadow:
+        0 4px 20px rgba(59, 130, 246, 0.45),
+        0 1px 0 rgba(255,255,255,0.15) inset;
+    animation: btnShimmer 3s linear 2s infinite;
+}
+
+.landing-btn-filled:hover {
+    box-shadow:
+        0 8px 32px rgba(59, 130, 246, 0.6),
+        0 1px 0 rgba(255,255,255,0.2) inset;
+}
+
+/* Outlined — Apple secondary */
+.landing-btn-outlined {
+    border: 1.5px solid;
+}
+
+[data-theme="dark"] .landing-btn-outlined {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(99, 162, 255, 0.3);
+    color: rgba(226, 232, 240, 0.9);
+}
+
+[data-theme="dark"] .landing-btn-outlined:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(99, 162, 255, 0.55);
+    color: #e2e8f0;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+[data-theme="light"] .landing-btn-outlined {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(99, 130, 220, 0.3);
+    color: #1e3a8a;
+}
+
+[data-theme="light"] .landing-btn-outlined:hover {
+    background: rgba(239, 246, 255, 0.85);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* ── Trust Line ── */
+.landing-trust {
+    margin-top: 1.5rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    animation: landingFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both;
+}
+
+[data-theme="dark"] .landing-trust {
+    color: rgba(100, 116, 139, 0.8);
+}
+
+[data-theme="light"] .landing-trust {
+    color: #94a3b8;
+}
+
+/* ── Bottom floating badge (Apple-style status indicator) ── */
+.landing-badge {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    font-family: var(--font, system-ui);
+    z-index: 20;
+    animation: landingBadgeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+    white-space: nowrap;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .landing-badge {
+    background: rgba(15, 25, 50, 0.75);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: rgba(148, 163, 184, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .landing-badge {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: #64748b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+    animation: badgePulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════
+   KEYFRAMES
+   ══════════════════════════════════════════════ */
+
+@keyframes landingFadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes landingFadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes landingCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.96);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes iconEntrance {
+    from { opacity: 0; transform: translateY(20px) scale(0.5); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-7px); }
+}
+
+@keyframes gradientShift {
+    0%   { background-position: 0% center; }
+    50%  { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+@keyframes btnShimmer {
+    0%   { background-position: 0% center; }
+    50%  { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+@keyframes landingBadgeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25); }
+    50%       { box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.1); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 560px) {
+    .landing-card {
+        padding: 2rem 1.5rem 1.75rem;
+        border-radius: 20px;
+    }
+    .landing-title {
+        font-size: 1.9rem;
+    }
+    .landing-icon {
+        font-size: 1.7rem;
+    }
+    .landing-badge {
+        font-size: 0.72rem;
+        padding: 0.45rem 1rem;
+    }
+}
