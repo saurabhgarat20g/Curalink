@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import HeroBackground from '../components/HeroBackground';
+import PlexusBackground from '../components/PlexusBackground';
 import { registerUser } from '../api/client';
 import './auth.css';
 
