@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import PlexusBackground from '../components/PlexusBackground';
+import HeroBackground from '../components/HeroBackground';
+import { loginUser } from '../api/client';
 import './auth.css';
 
 export default function LoginPage({ theme, onToggleTheme }) {
@@ -21,11 +22,15 @@ export default function LoginPage({ theme, onToggleTheme }) {
 
         setLoading(true);
 
-        // Simulate a brief auth delay, then route to the app
-        setTimeout(() => {
-            localStorage.setItem('curalink_user', JSON.stringify({ email, role: 'user' }));
+        try {
+            const userData = await loginUser({ email, password });
+            localStorage.setItem('curalink_user', JSON.stringify(userData));
             navigate('/app');
-        }, 800);
+        } catch (err) {
+            setError(err.response?.data?.error || 'Login failed. Invalid credentials.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (

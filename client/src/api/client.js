@@ -31,4 +31,31 @@ export const getStatus = async () => {
     return data;
 };
 
+// Auth API
+export const loginUser = async (credentials) => {
+    const { data } = await api.post('/auth/login', credentials);
+    return data;
+};
+
+export const registerUser = async (userData) => {
+    const { data } = await api.post('/auth/register', userData);
+    return data;
+};
+
+// Add interceptor to include token in requests
+api.interceptors.request.use((config) => {
+    const userStr = localStorage.getItem('curalink_user');
+    if (userStr) {
+        try {
+            const user = JSON.parse(userStr);
+            if (user && user.token) {
+                config.headers.Authorization = `Bearer ${user.token}`;
+            }
+        } catch (e) {
+            console.error('Error parsing user token', e);
+        }
+    }
+    return config;
+});
+
 export default api;

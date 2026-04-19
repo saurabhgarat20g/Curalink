@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import PlexusBackground from '../components/PlexusBackground';
+import HeroBackground from '../components/HeroBackground';
+import { registerUser } from '../api/client';
 import './auth.css';
 
 export default function RegisterPage({ theme, onToggleTheme }) {
@@ -31,11 +32,15 @@ export default function RegisterPage({ theme, onToggleTheme }) {
 
         setLoading(true);
 
-        // Simulate registration, then route to app
-        setTimeout(() => {
-            localStorage.setItem('curalink_user', JSON.stringify({ name, email, role }));
+        try {
+            const userData = await registerUser({ name, email, password, role });
+            localStorage.setItem('curalink_user', JSON.stringify(userData));
             navigate('/app');
-        }, 900);
+        } catch (err) {
+            setError(err.response?.data?.error || 'Registration failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
