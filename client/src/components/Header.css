@@ -1,0 +1,187 @@
+/* ── Header ─────────────────────────────────────────── */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 64px;
+    background: #fff;
+    border-bottom: 1px solid var(--border-soft);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 1rem;
+}
+
+/* Brand */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 2px 8px rgba(66, 133, 244, .35);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.brand-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+}
+
+.brand-tagline {
+    font-size: 0.63rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 500;
+}
+
+/* Layout */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Status indicators */
+.status-indicators {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-dot-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.73rem;
+    color: var(--text-muted);
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-active {
+    background: var(--green);
+    box-shadow: 0 0 0 2px var(--green-light);
+}
+
+.dot-inactive {
+    background: var(--border);
+}
+
+/* Icon button */
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--t-fast);
+}
+
+.icon-btn:hover {
+    background: var(--bg-gray2);
+}
+
+/* Deep Research toggle */
+.deep-research-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.875rem 0.4rem 0.65rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-full);
+    background: #fff;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: var(--font);
+    transition: all var(--t-base);
+}
+
+.deep-research-btn:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: var(--blue-light);
+}
+
+.deep-research-btn.active {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    color: var(--blue);
+}
+
+.zap-active {
+    color: var(--yellow);
+}
+
+/* Toggle pill */
+.toggle-pill {
+    width: 28px;
+    height: 16px;
+    border-radius: 8px;
+    background: var(--bg-gray3);
+    position: relative;
+    transition: background var(--t-base);
+}
+
+.toggle-pill.on {
+    background: var(--blue);
+}
+
+.toggle-thumb {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    top: 2px;
+    left: 2px;
+    transition: transform var(--t-base);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.toggle-pill.on .toggle-thumb {
+    transform: translateX(12px);
+}
