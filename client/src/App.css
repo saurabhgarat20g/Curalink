@@ -13,9 +13,10 @@
   display: none;
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(40px); /* Reduced from 80px for performance */
   pointer-events: none;
   z-index: 0;
+  will-change: filter;
 }
 
 [data-theme="dark"] .bg-glow {
@@ -46,6 +47,7 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
+  will-change: transform;
 }
 
 /* ── Content Area ──────────────────────────────────── */

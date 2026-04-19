@@ -35,8 +35,9 @@ export default function HeroBackground({ theme = 'dark' }) {
             ];
 
         function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const scale = 0.75; // Lower resolution for background blur effects (huge perf gain)
+            canvas.width = window.innerWidth * scale;
+            canvas.height = window.innerHeight * scale;
         }
 
         function lerp(a, b, t) { return a + (b - a) * t; }
@@ -80,10 +81,10 @@ export default function HeroBackground({ theme = 'dark' }) {
                 ctx.fill();
             });
 
-            // ── Subtle dot-grid overlay (Google/Apple minimalism) ─────────
+            // ── Subtle dot-grid overlay ───────────────────────────────────
             ctx.globalCompositeOperation = 'source-over';
-            const gridSize = 36;
-            const dotR = 0.9;
+            const gridSize = 64; // Increased from 36 for better performance
+            const dotR = 0.8;
             const dotAlpha = isDark ? 0.07 : 0.10;
             ctx.fillStyle = isDark
                 ? `rgba(99,162,255,${dotAlpha})`

@@ -264,6 +264,8 @@ export default function ResultsPanel({
     filterYear, setFilterYear, sortBy, setSortBy,
     activeTab, setActiveTab
 }) {
+    const [visibleCount, setVisibleCount] = useState(15);
+
     const tabs = [
         { id: 'analysis', label: 'AI Analysis', icon: <BarChart3 size={14} /> },
         { id: 'publications', label: `Publications ${results ? `(${results.publications?.length || 0})` : ''}`, icon: <BookOpen size={14} /> },
@@ -280,6 +282,9 @@ export default function ResultsPanel({
             if (sortBy === 'citations') return (b.citedBy || 0) - (a.citedBy || 0);
             return 0;
         });
+
+    const displayedPubs = filteredPubs.slice(0, visibleCount);
+    const displayedTrials = (results?.trials || []).slice(0, Math.min(visibleCount, 15));
 
     const years = [...new Set((results?.publications || []).map(p => p.year).filter(Boolean))].sort((a, b) => b - a);
 
@@ -383,17 +388,26 @@ export default function ResultsPanel({
                                 {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
                             </div>
                         ) : filteredPubs.length > 0 ? (
-                            <div className="cards-grid">
-                                {filteredPubs.map((pub, i) => (
-                                    <PublicationCard
-                                        key={pub.id}
-                                        pub={pub}
-                                        index={i}
-                                        onBookmark={onBookmark}
-                                        bookmarked={isBookmarked(pub.id)}
-                                    />
-                                ))}
-                            </div>
+                            <>
+                                <div className="cards-grid">
+                                    {displayedPubs.map((pub, i) => (
+                                        <PublicationCard
+                                            key={pub.id}
+                                            pub={pub}
+                                            index={i < 10 ? i : 0} // Only stagger the first 10
+                                            onBookmark={onBookmark}
+                                            bookmarked={isBookmarked(pub.id)}
+                                        />
+                                    ))}
+                                </div>
+                                {filteredPubs.length > visibleCount && (
+                                    <div className="load-more-container">
+                                        <button className="load-more-btn" onClick={() => setVisibleCount(prev => prev + 15)}>
+                                            Load More Research ({filteredPubs.length - visibleCount} remaining)
+                                        </button>
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className="empty-state">No publications match the current filters.</div>
                         )}
@@ -408,17 +422,24 @@ export default function ResultsPanel({
                                 {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}
                             </div>
                         ) : results?.trials?.length > 0 ? (
-                            <div className="cards-grid">
-                                {results.trials.map((trial, i) => (
-                                    <TrialCard
-                                        key={trial.id}
-                                        trial={trial}
-                                        index={i}
-                                        onBookmark={onBookmark}
-                                        bookmarked={isBookmarked(trial.id)}
-                                    />
-                                ))}
-                            </div>
+                            <>
+                                <div className="cards-grid">
+                                    {displayedTrials.map((trial, i) => (
+                                        <TrialCard
+                                            key={trial.id}
+                                            trial={trial}
+                                            index={i < 10 ? i : 0}
+                                            onBookmark={onBookmark}
+                                            bookmarked={isBookmarked(trial.id)}
+                                        />
+                                    ))}
+                                </div>
+                                {results.trials.length > 15 && (
+                                    <div className="empty-state-hint">
+                                        Showing top 15 relevant clinical trials.
+                                    </div>
+                                )}
+                            </>
                         ) : (
                             <div className="empty-state">
                                 No clinical trials found for this query.

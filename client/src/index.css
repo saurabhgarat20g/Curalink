@@ -268,6 +268,8 @@ body {
 /* Utility */
 .animate-fade-in {
   animation: fadeInSmooth 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-stagger-1 {
@@ -284,6 +286,8 @@ body {
 
 .animate-fade-scale {
   animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-slide-left {

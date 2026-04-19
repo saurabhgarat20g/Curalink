@@ -757,3 +757,61 @@
 .empty-state small {
     font-size: 0.8rem;
 }
+/* ── Load More ─────────────────────────────────────── */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.load-more-btn {
+    background: #fff;
+    border: 1px solid var(--blue-mid);
+    color: var(--blue);
+    padding: 0.75rem 2rem;
+    border-radius: var(--r-full);
+    font-family: var(--font);
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all var(--t-base);
+    box-shadow: var(--shadow-1);
+}
+
+.load-more-btn:hover {
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+}
+
+.empty-state-hint {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-gray2);
+    border-radius: var(--r-md);
+}
+
+[data-theme="dark"] .load-more-btn {
+    background: var(--bg-gray3);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .load-more-btn:hover {
+    background: var(--border);
+}
+
+[data-theme="dark"] .empty-state,
+[data-theme="dark"] .skeleton-card,
+[data-theme="dark"] .loading-analysis,
+[data-theme="dark"] .analysis-card,
+[data-theme="dark"] .result-card,
+[data-theme="dark"] .stats-bar,
+[data-theme="dark"] .results-tabs {
+    background: var(--bg-gray2);
+    border-color: var(--border-soft);
+}
