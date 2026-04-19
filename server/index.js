@@ -30,15 +30,18 @@ app.use('/api/', limiter);
 app.use('/api', queryRoutes);
 app.use('/api', historyRoutes);
 
-// Serve Static Frontend Files in Production
-const clientPath = path.join(__dirname, '../client/dist');
-app.use(express.static(clientPath));
+// Serve Static Frontend Files (ONLY in unified local deployment or specific production environments)
+// On cloud providers like Render, the Frontend (Vercel) and Backend are usually separated.
+if (process.env.SERVE_STATIC === 'true' || process.env.NODE_ENV === 'development') {
+  const clientPath = path.join(__dirname, '../client/dist');
+  app.use(express.static(clientPath));
 
-// Catch-all route for React (SPA)
-app.get('*', (req, res) => {
-  if (req.path.startsWith('/api')) return next();
-  res.sendFile(path.join(clientPath, 'index.html'));
-});
+  // Catch-all route for React (SPA)
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(clientPath, 'index.html'));
+  });
+}
 
 // Health check
 app.get('/health', (req, res) => {

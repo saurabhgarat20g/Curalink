@@ -24,4 +24,5 @@ Write-Host "The app will now be available at http://localhost:5000" -ForegroundC
 Write-Host "Starting Server..." -ForegroundColor Yellow
 
 cd server
+$env:SERVE_STATIC="true"
 node index.js
