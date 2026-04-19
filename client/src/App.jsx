@@ -1,14 +1,24 @@
 import { useState, useEffect, useRef } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { submitQuery, getStatus } from './api/client';
+
+// Pages
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+
+// Dashboard components
 import Sidebar from './components/Sidebar';
 import QueryForm from './components/QueryForm';
 import ResultsPanel from './components/ResultsPanel';
 import Header from './components/Header';
 import WelcomeScreen from './components/WelcomeScreen';
+
 import './App.css';
 
-function App() {
+// ─── Dashboard ───────────────────────────────────────────────────────────────
+function Dashboard({ theme, onToggleTheme }) {
   const [sessionId] = useState(() => {
     const stored = localStorage.getItem('caura_session_id');
     if (stored) return stored;
@@ -34,7 +44,6 @@ function App() {
   const [activeTab, setActiveTab] = useState('analysis');
   const resultsRef = useRef(null);
 
-  // Check system status
   useEffect(() => {
     getStatus().then(setStatus).catch(() => { });
   }, []);
@@ -54,12 +63,7 @@ function App() {
     setChatHistory(prev => [...prev, userMsg]);
 
     try {
-      const data = await submitQuery({
-        ...formData,
-        sessionId,
-        deepResearch
-      });
-
+      const data = await submitQuery({ ...formData, sessionId, deepResearch });
       setResults(data);
 
       const assistantMsg = {
@@ -71,7 +75,6 @@ function App() {
       };
       setChatHistory(prev => [...prev, assistantMsg]);
 
-      // Scroll to results
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
@@ -104,8 +107,7 @@ function App() {
   };
 
   return (
-    <div className="app-shell">
-      {/* Background glow elements */}
+    <div className="app-shell" data-theme={theme}>
       <div className="bg-glow bg-glow-1" />
       <div className="bg-glow bg-glow-2" />
 
@@ -124,6 +126,8 @@ function App() {
           status={status}
           deepResearch={deepResearch}
           onToggleDeepResearch={() => setDeepResearch(!deepResearch)}
+          theme={theme}
+          onToggleTheme={onToggleTheme}
         />
 
         <main className="content-area">
@@ -131,7 +135,6 @@ function App() {
             {!results && !loading && (
               <WelcomeScreen onExampleClick={handleSubmit} />
             )}
-
             <div className="query-section">
               <QueryForm
                 onSubmit={handleSubmit}
@@ -170,6 +173,32 @@ function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+// ─── Root App with Theme + Routing ───────────────────────────────────────────
+function App() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('curalink_theme') || 'dark';
+  });
+
+  const toggleTheme = () => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('curalink_theme', next);
+      return next;
+    });
+  };
+
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage theme={theme} onToggleTheme={toggleTheme} />} />
+      <Route path="/login" element={<LoginPage theme={theme} onToggleTheme={toggleTheme} />} />
+      <Route path="/register" element={<RegisterPage theme={theme} onToggleTheme={toggleTheme} />} />
+      <Route path="/app" element={<Dashboard theme={theme} onToggleTheme={toggleTheme} />} />
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

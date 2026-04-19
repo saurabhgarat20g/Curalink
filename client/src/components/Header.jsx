@@ -1,7 +1,8 @@
-import { Activity, Menu, Zap, Cpu } from 'lucide-react';
+import { Activity, Menu, Zap, Cpu, Moon, Sun, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
-export default function Header({ onToggleSidebar, status, deepResearch, onToggleDeepResearch }) {
+export default function Header({ onToggleSidebar, status, deepResearch, onToggleDeepResearch, theme, onToggleTheme }) {
     return (
         <header className="app-header">
             <div className="header-left">
@@ -47,6 +48,19 @@ export default function Header({ onToggleSidebar, status, deepResearch, onToggle
                     <div className={`toggle-pill ${deepResearch ? 'on' : ''}`}>
                         <div className="toggle-thumb" />
                     </div>
+                </button>
+
+                <Link to="/" className="icon-btn" title="Back to Home" id="home-nav-btn">
+                    <Home size={18} />
+                </Link>
+
+                <button
+                    className="icon-btn theme-toggle"
+                    onClick={onToggleTheme}
+                    title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                    id="dashboard-theme-toggle"
+                >
+                    {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
             </div>
         </header>

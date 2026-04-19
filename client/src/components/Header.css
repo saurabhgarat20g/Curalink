@@ -185,3 +185,40 @@
 .toggle-pill.on .toggle-thumb {
     transform: translateX(12px);
 }
+
+/* ── Dark Mode Header ── */
+[data-theme="dark"] .app-header {
+    background: rgba(10, 17, 32, 0.95);
+    border-bottom-color: var(--border);
+    box-shadow: 0 1px 0 rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .icon-btn {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .icon-btn:hover {
+    background: var(--bg-gray3);
+}
+
+[data-theme="dark"] .deep-research-btn {
+    background: var(--bg-gray2);
+    border-color: var(--border);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .deep-research-btn:hover,
+[data-theme="dark"] .deep-research-btn.active {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .brand-name {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .brand-tagline {
+    color: var(--text-muted);
+}

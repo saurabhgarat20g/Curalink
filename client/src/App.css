@@ -4,11 +4,38 @@
   display: flex;
   overflow: hidden;
   background: var(--bg-gray);
+  transition: background 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-/* Background – none needed in light mode */
+/* ── Dark Mode Glow accents ── */
 .bg-glow {
   display: none;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="dark"] .bg-glow {
+  display: block;
+}
+
+[data-theme="dark"] .bg-glow-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  top: -120px;
+  right: -100px;
+}
+
+[data-theme="dark"] .bg-glow-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  bottom: -100px;
+  left: -80px;
 }
 
 /* ── Main layout ───────────────────────────────────── */
@@ -17,6 +44,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── Content Area ──────────────────────────────────── */
@@ -37,7 +66,6 @@
   flex-direction: column;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding-top: 15vh;
-  /* Center search bar vertically in hero state */
 }
 
 .hero-container.hero-minimized {
@@ -55,6 +83,7 @@
   top: 0;
   padding: 0.5rem 0 0.25rem;
   background: var(--bg-gray);
+  transition: background 0.3s ease;
 }
 
 /* ── Results ───────────────────────────────────────── */
@@ -68,12 +97,18 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.875rem 1.25rem;
-  background: #fce8e6;
-  border: 1px solid #f4c2be;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: var(--r-md);
-  color: #c5221f;
+  color: #f87171;
   font-size: 0.875rem;
   animation: fadeInUp 0.3s ease;
+}
+
+[data-theme="light"] .error-banner {
+  background: #fce8e6;
+  border-color: #f4c2be;
+  color: #c5221f;
 }
 
 .error-icon {
